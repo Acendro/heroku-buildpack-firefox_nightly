@@ -43,26 +43,36 @@ function indent() {
 #VERSION_FIREFOX=57.0.1
 #VERSION_GECKODRIVER=0.19.1
 
-VERSION_FIREFOX=82.0.1
-VERSION_GECKODRIVER=0.27.0
-
 #VERSION_FIREFOX=64.0.2
 #VERSION_GECKODRIVER=0.24.0
 
+VERSION_FIREFOX_NIGHTLY=84.0a1
+VERSION_GECKODRIVER=0.27.0
+
 LANG=en-US
-PLATFORM=linux64
+PLATFORM=linux-x86_64
 
 # Buildpack URL
 ARCHIVE_NAME_FIREFOX=firefox
 ARCHIVE_NAME_GECKODRIVER=geckodriver
-FILE_NAME_FIREFOX=${ARCHIVE_NAME_FIREFOX}-${VERSION_FIREFOX}.tar.bz2
+#firefox-84.0a1.en-US.linux-x86_64.tar.bz2
+FILE_NAME_FIREFOX=${ARCHIVE_NAME_FIREFOX}-${VERSION_FIREFOX}.${LANG}.${LANG}.tar.bz2
 FILE_NAME_GECKODRIVER=${ARCHIVE_NAME_GECKODRIVER}-v${VERSION_GECKODRIVER}-${PLATFORM}.tar.gz
-BUILDPACK_FIREFOX_PACKAGE="https://download.mozilla.org/?product=firefox-nightly-latest-ssl&os=${PLATFORM}&lang=${LANG}"
+BUILDPACK_FIREFOX_PACKAGE=https://download-origin.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-${VERSION_FIREFOX_NIGHTLY}.${LANG}.${LANG}.tar.bz2
+#BUILDPACK_FIREFOX_PACKAGE="https://download.mozilla.org/?product=firefox-nightly-latest-ssl&os=${PLATFORM}&lang=${LANG}"
 BUILDPACK_GECKODRIVER_PACKAGE="https://github.com/mozilla/geckodriver/releases/download/v${VERSION_GECKODRIVER}/${FILE_NAME_GECKODRIVER}"
 
+#https://download-origin.cdn.mozilla.net/pub/firefox/nightly/latest-mozilla-central/firefox-84.0a1.en-US.linux-x86_64.tar.bz2
 #https://download.mozilla.org/?product=firefox-82.0.1-SSL&os=linux64&lang=en-US           STANDARD FF
 #https://download.mozilla.org/?product=firefox-nightly-latest-ssl&os=linux64&lang=en-US   RICHTIG
 #https://download.mozilla.org/?product=firefox-nightly&os=linux64&lang=en-US              LÄUFT NICHT
+
+topic "      --- Echoing variables ---      "
+echo FILE_NAME_FIREFOX
+echo BUILDPACK_FIREFOX_PACKAGE
+echo FILE_NAME_GECKODRIVER
+echo BUILDPACK_GECKODRIVER_PACKAGE
+topic "      --- Echoing variables ---      "
 
 # Install correct dependencies according to $STACK
 case "$STACK" in
